@@ -1,0 +1,212 @@
+/* style.css - UTS Full-stack Programming */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f4f6f9;
+    color: #333333;
+    line-height: 1.6;
+    padding: 20px;
+}
+
+.container {
+    max-width: 760px;
+    margin: 30px auto;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    padding: 30px;
+    border: 1px solid #e1e4e8;
+}
+
+.header-title {
+    text-align: center;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #e9ecef;
+}
+
+.header-title h1 {
+    font-size: 24px;
+    color: #2b3a4a;
+    margin-bottom: 6px;
+}
+
+.header-title p {
+    font-size: 14px;
+    color: #6c757d;
+}
+
+/* Soal Section */
+.soal-card {
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.pertanyaan-text {
+    font-size: 16px;
+    font-weight: bold;
+    color: #2d3748;
+    margin-bottom: 14px;
+}
+
+.opsi-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.opsi-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 14px;
+    border: 1px solid #e2e8f0;
+    border-radius: 5px;
+    background-color: #fafbfc;
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+.opsi-item:hover {
+    background-color: #edf2f7;
+    border-color: #cbd5e0;
+}
+
+.opsi-item input[type="radio"] {
+    margin-right: 12px;
+    width: 17px;
+    height: 17px;
+    cursor: pointer;
+}
+
+.opsi-label {
+    cursor: pointer;
+    font-size: 15px;
+    width: 100%;
+}
+
+/* Navigation Buttons */
+.nav-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #e9ecef;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 24px;
+    font-size: 15px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.btn:active {
+    transform: scale(0.98);
+}
+
+.btn-prev {
+    background-color: #6c757d;
+    color: #ffffff;
+}
+
+.btn-prev:hover {
+    background-color: #5a6268;
+}
+
+.btn-next {
+    background-color: #007bff;
+    color: #ffffff;
+    margin-left: auto;
+}
+
+.btn-next:hover {
+    background-color: #0069d9;
+}
+
+.btn-play {
+    background-color: #28a745;
+    color: #ffffff;
+    padding: 12px 30px;
+    font-size: 16px;
+    border-radius: 6px;
+}
+
+.btn-play:hover {
+    background-color: #218838;
+}
+
+/* Halaman Kesimpulan */
+.kesimpulan-list {
+    list-style: none;
+    margin-bottom: 25px;
+}
+
+.kesimpulan-item {
+    background: #fdfdfd;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 16px 20px;
+    margin-bottom: 14px;
+}
+
+.kesimpulan-item .pertanyaan {
+    font-weight: bold;
+    font-size: 15px;
+    color: #2d3748;
+    margin-bottom: 8px;
+}
+
+.jawaban-user {
+    font-size: 15px;
+    margin-left: 15px;
+    margin-bottom: 4px;
+}
+
+.jawaban-user.benar {
+    color: #28a745;
+    font-weight: bold;
+}
+
+.jawaban-user.salah {
+    color: #dc3545;
+    font-weight: bold;
+}
+
+.jawaban-benar {
+    font-size: 15px;
+    margin-left: 15px;
+    color: #17a2b8;
+    font-weight: bold;
+}
+
+.skor-box {
+    background-color: #e8f4fd;
+    border: 2px solid #b8daff;
+    color: #004085;
+    text-align: center;
+    padding: 16px;
+    border-radius: 6px;
+    font-size: 22px;
+    font-weight: bold;
+    margin: 25px 0;
+}
+
+.play-again-container {
+    text-align: center;
+    margin-top: 20px;
+}
