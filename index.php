@@ -3,7 +3,7 @@ session_start();
 require_once "soal.php";
 require_once "jawaban.php";
 
-// Inisialisasi object class soal dan class jawaban
+// Initialization
 $soalObj = new soal();
 $jawabanObj = new jawaban();
 
