@@ -3,11 +3,9 @@ session_start();
 require_once "soal.php";
 require_once "jawaban.php";
 
-// Inisialisasi object class soal dan class jawaban
 $soalObj = new soal();
 $jawabanObj = new jawaban();
 
-// Penanganan Reset / Play Again
 if (isset($_GET['reset']) && $_GET['reset'] == '1') {
     unset($_SESSION['jawaban']);
     header("Location: index.php");
@@ -15,7 +13,6 @@ if (isset($_GET['reset']) && $_GET['reset'] == '1') {
     $aksi = isset($_POST['aksi']) ? $_POST['aksi'] : '';
     $halaman_aktif = isset($_POST['halaman_aktif']) ? (int)$_POST['halaman_aktif'] : 1;
 
-    // Simpan jawaban user ke Session sambil dicek apakah benar atau salah
     if (isset($_POST['jawaban']) && is_array($_POST['jawaban'])) {
         if (!isset($_SESSION['jawaban'])) {
             $_SESSION['jawaban'] = array();
@@ -24,10 +21,8 @@ if (isset($_GET['reset']) && $_GET['reset'] == '1') {
             $idsoal = (int)$idsoal;
             $idjawaban = (int)$idjawaban;
 
-            // Periksa jawaban dengan method class jawaban
             $is_benar = $jawabanObj->cekJawaban($idjawaban);
 
-            // Simpan ke Session
             $_SESSION['jawaban'][$idsoal] = array(
                 'idjawaban' => $idjawaban,
                 'benarkah'  => $is_benar
@@ -35,10 +30,8 @@ if (isset($_GET['reset']) && $_GET['reset'] == '1') {
         }
     }
 
-    // Ambil daftar nomor halaman dari database secara dinamis
     $daftar_halaman = $soalObj->getDaftarHalaman();
 
-    // Cari posisi index nomor halaman aktif menggunakan perulangan for biasa
     $current_index = 0;
     for ($i = 0; $i < count($daftar_halaman); $i++) {
         if ($daftar_halaman[$i] == $halaman_aktif) {
@@ -48,16 +41,13 @@ if (isset($_GET['reset']) && $_GET['reset'] == '1') {
     }
 
     if ($aksi == 'Next') {
-        // Jika sudah di halaman terakhir, lanjut ke halaman kesimpulan
         if ($current_index >= count($daftar_halaman) - 1) {
             header("Location: kesimpulan.php");
         } else {
-            // Lanjut ke halaman berikutnya
             $next_page = $daftar_halaman[$current_index + 1];
             header("Location: index.php?halaman=" . $next_page);
         }
     } elseif ($aksi == 'Previous') {
-        // Lanjut ke halaman sebelumnya
         if ($current_index > 0) {
             $prev_page = $daftar_halaman[$current_index - 1];
             header("Location: index.php?halaman=" . $prev_page);
@@ -66,7 +56,6 @@ if (isset($_GET['reset']) && $_GET['reset'] == '1') {
         }
     }
 } else {
-    // Menampilkan Halaman Soal (GET Request)
     $daftar_halaman = $soalObj->getDaftarHalaman();
     $soal_list = array();
     $current_index = 0;
@@ -79,7 +68,6 @@ if (isset($_GET['reset']) && $_GET['reset'] == '1') {
             $halaman_aktif = $daftar_halaman[0];
         }
 
-        // Cari posisi index nomor halaman aktif menggunakan perulangan for biasa
         for ($i = 0; $i < count($daftar_halaman); $i++) {
             if ($daftar_halaman[$i] == $halaman_aktif) {
                 $current_index = $i;
@@ -90,7 +78,6 @@ if (isset($_GET['reset']) && $_GET['reset'] == '1') {
         $is_first = ($current_index == 0);
         $is_last = ($current_index == count($daftar_halaman) - 1);
 
-        // Ambil soal berdasarkan halaman_ke secara dinamis
         $soal_list = $soalObj->getSoalByHalaman($halaman_aktif);
     }
 ?>
@@ -120,10 +107,8 @@ if (isset($_GET['reset']) && $_GET['reset'] == '1') {
                 $nomor = (int)$soal['nomor'];
                 $pertanyaan = htmlentities((string)$soal['pertanyaan']);
 
-                // Opsi jawaban posisi random di tiap refresh (ORDER BY RAND())
                 $opsi_list = $jawabanObj->getJawabanBySoal($idsoal);
 
-                // Cek jawaban sebelumnya di Session
                 $selected_idjawaban = isset($_SESSION['jawaban'][$idsoal]['idjawaban']) 
                     ? (int)$_SESSION['jawaban'][$idsoal]['idjawaban'] 
                     : null;
