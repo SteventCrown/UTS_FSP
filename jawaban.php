@@ -17,7 +17,7 @@ class jawaban extends orangtua {
         $stmt->bind_param("i", $idsoal);
         $stmt->execute();
         $res = $stmt->get_result();
-        $data = [];
+        $data = array();
         while ($row = $res->fetch_assoc()) {
             $data[] = $row;
         }

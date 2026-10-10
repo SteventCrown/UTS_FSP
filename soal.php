@@ -10,15 +10,18 @@ class soal extends orangtua {
         parent::__construct();
     }
 
-    // Mendapatkan daftar halaman_ke yang unik dan terurut
+    // Mendapatkan daftar nomor halaman yang ada di tabel soal secara terurut
     public function getDaftarHalaman() {
-        $sql = "SELECT DISTINCT halaman_ke FROM soal ORDER BY halaman_ke ASC";
+        $sql = "SELECT halaman_ke FROM soal ORDER BY halaman_ke ASC";
         $stmt = $this->mysqli->prepare($sql);
         $stmt->execute();
         $res = $stmt->get_result();
-        $daftar = [];
+        $daftar = array();
         while ($row = $res->fetch_assoc()) {
-            $daftar[] = (int)$row['halaman_ke'];
+            $halaman = (int)$row['halaman_ke'];
+            if (!in_array($halaman, $daftar)) {
+                $daftar[] = $halaman;
+            }
         }
         $stmt->close();
         return $daftar;
@@ -31,7 +34,7 @@ class soal extends orangtua {
         $stmt->bind_param("i", $halaman_ke);
         $stmt->execute();
         $res = $stmt->get_result();
-        $data = [];
+        $data = array();
         while ($row = $res->fetch_assoc()) {
             $data[] = $row;
         }
@@ -45,7 +48,7 @@ class soal extends orangtua {
         $stmt = $this->mysqli->prepare($sql);
         $stmt->execute();
         $res = $stmt->get_result();
-        $data = [];
+        $data = array();
         while ($row = $res->fetch_assoc()) {
             $data[] = $row;
         }
