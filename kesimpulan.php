@@ -6,12 +6,8 @@ require_once "jawaban.php";
 $soalObj = new soal();
 $jawabanObj = new jawaban();
 
-// Jika belum ada jawaban pada session, arahkan kembali ke index.php
-if (!isset($_SESSION['jawaban']) || empty($_SESSION['jawaban'])) {
-    header("Location: index.php");
-} else {
-    $semua_soal = $soalObj->getAllSoal();
-    $skor_akhir = 0;
+$semua_soal = $soalObj->getAllSoal();
+$skor_akhir = 0;
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -45,7 +41,7 @@ if (!isset($_SESSION['jawaban']) || empty($_SESSION['jawaban'])) {
         }
         ?>
         <div style="margin-bottom: 15px;">
-            <strong><?php echo $nomor; ?>. <?php echo $pertanyaan; ?></strong><br>
+            <b><?php echo $nomor; ?>. <?php echo $pertanyaan; ?></b><br>
             <?php if ($user_jawaban) { ?>
                 <?php if ($is_benar) { ?>
                     &nbsp;&nbsp;- Jawaban user : <?php echo htmlentities((string)$user_jawaban['isi_jawaban']); ?> (benar)<br>
@@ -71,7 +67,7 @@ if (!isset($_SESSION['jawaban']) || empty($_SESSION['jawaban'])) {
     <?php } ?>
 
     <hr>
-    <p><strong>Skor Akhir : <?php echo $skor_akhir; ?></strong></p>
+    <p><b>Skor Akhir : <?php echo $skor_akhir; ?></b></p>
 
     <form action="index.php" method="GET">
         <input type="hidden" name="reset" value="1">
@@ -79,6 +75,3 @@ if (!isset($_SESSION['jawaban']) || empty($_SESSION['jawaban'])) {
     </form>
 </body>
 </html>
-<?php
-}
-?>

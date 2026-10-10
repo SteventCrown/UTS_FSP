@@ -73,7 +73,7 @@ if (isset($_GET['reset']) && $_GET['reset'] == '1') {
     $is_first = true;
     $is_last = true;
 
-    if (!empty($daftar_halaman)) {
+    if (count($daftar_halaman) > 0) {
         $halaman_aktif = isset($_GET['halaman']) ? (int)$_GET['halaman'] : $daftar_halaman[0];
         if (!in_array($halaman_aktif, $daftar_halaman)) {
             $halaman_aktif = $daftar_halaman[0];
@@ -105,7 +105,7 @@ if (isset($_GET['reset']) && $_GET['reset'] == '1') {
 <body>
     <h2>Kuis Online</h2>
 
-    <?php if (empty($daftar_halaman) || empty($soal_list)) { ?>
+    <?php if (count($daftar_halaman) == 0 || count($soal_list) == 0) { ?>
         <p>Belum ada data soal pada database fullstack.</p>
     <?php } else { ?>
         <p>Halaman <?php echo ($current_index + 1); ?> dari <?php echo count($daftar_halaman); ?></p>

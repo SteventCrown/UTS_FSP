@@ -1,16 +1,11 @@
 <?php
 require_once "parent.php";
 
-// class [NAMA_CLASS] extends [NAMA_CLASS_PARENT]
-// 1. Inherit Parent Class
 class soal extends orangtua {
-    // 2. Memiliki constructor 
-    // Di dalam constructor, memanggil constructor parent class
     public function __construct() {
         parent::__construct();
     }
 
-    // Mendapatkan daftar nomor halaman yang ada di tabel soal secara terurut
     public function getDaftarHalaman() {
         $sql = "SELECT halaman_ke FROM soal ORDER BY halaman_ke ASC";
         $stmt = $this->mysqli->prepare($sql);
@@ -27,7 +22,6 @@ class soal extends orangtua {
         return $daftar;
     }
 
-    // Mengambil semua soal pada halaman tertentu sesuai kolom halaman_ke
     public function getSoalByHalaman($halaman_ke) {
         $sql = "SELECT * FROM soal WHERE halaman_ke = ? ORDER BY nomor ASC";
         $stmt = $this->mysqli->prepare($sql);
@@ -42,7 +36,6 @@ class soal extends orangtua {
         return $data;
     }
 
-    // Mengambil seluruh data soal untuk halaman kesimpulan
     public function getAllSoal() {
         $sql = "SELECT * FROM soal ORDER BY nomor ASC";
         $stmt = $this->mysqli->prepare($sql);
@@ -56,7 +49,6 @@ class soal extends orangtua {
         return $data;
     }
 
-    // Mengambil data satu soal berdasarkan idsoal
     public function getSoalById($idsoal) {
         $sql = "SELECT * FROM soal WHERE idsoal = ?";
         $stmt = $this->mysqli->prepare($sql);
