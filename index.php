@@ -7,14 +7,12 @@ require_once "jawaban.php";
 $soalObj = new soal();
 $jawabanObj = new jawaban();
 
-// Penanganan Reset / Play Again
 if (isset($_GET['reset']) && $_GET['reset'] == '1') {
     unset($_SESSION['jawaban']);
     header("Location: index.php");
     exit();
 }
 
-// Penanganan submit Next atau Previous
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $aksi = isset($_POST['aksi']) ? $_POST['aksi'] : '';
     $halaman_aktif = isset($_POST['halaman_aktif']) ? (int)$_POST['halaman_aktif'] : 1;
@@ -144,7 +142,7 @@ $soal_list = $soalObj->getSoalByHalaman($halaman_aktif);
 
         <div class="nav-buttons">
             <?php if (!$is_first): ?>
-                <input type="submit" name="aksi" value="Previous" class="btn" formnovalidate>
+                <input type="submit" name="aksi" value="Previous" class="btn">
             <?php endif; ?>
             <input type="submit" name="aksi" value="Next" class="btn btn-primary">
         </div>
