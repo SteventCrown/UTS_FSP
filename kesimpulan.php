@@ -9,11 +9,9 @@ $jawabanObj = new jawaban();
 // Jika belum ada jawaban pada session, arahkan kembali ke index.php
 if (!isset($_SESSION['jawaban']) || empty($_SESSION['jawaban'])) {
     header("Location: index.php");
-    exit();
-}
-
-$semua_soal = $soalObj->getAllSoal();
-$skor_akhir = 0;
+} else {
+    $semua_soal = $soalObj->getAllSoal();
+    $skor_akhir = 0;
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -28,7 +26,7 @@ $skor_akhir = 0;
     <p>Berikut adalah hasil evaluasi dari pengerjaan kuis Anda:</p>
     <hr>
 
-    <?php foreach ($semua_soal as $s): ?>
+    <?php foreach ($semua_soal as $s) { ?>
         <?php
         $idsoal = (int)$s['idsoal'];
         $nomor = (int)$s['nomor'];
@@ -40,7 +38,7 @@ $skor_akhir = 0;
 
         if ($user_info && isset($user_info['idjawaban'])) {
             $user_jawaban = $jawabanObj->getJawabanById((int)$user_info['idjawaban']);
-            if ($user_jawaban && (int)$user_jawaban['benarkah'] === 1) {
+            if ($user_jawaban && (int)$user_jawaban['benarkah'] == 1) {
                 $is_benar = true;
                 $skor_akhir += 10;
             }
@@ -48,29 +46,29 @@ $skor_akhir = 0;
         ?>
         <div style="margin-bottom: 15px;">
             <strong><?php echo $nomor; ?>. <?php echo $pertanyaan; ?></strong><br>
-            <?php if ($user_jawaban): ?>
-                <?php if ($is_benar): ?>
+            <?php if ($user_jawaban) { ?>
+                <?php if ($is_benar) { ?>
                     &nbsp;&nbsp;- Jawaban user : <?php echo htmlentities((string)$user_jawaban['isi_jawaban']); ?> (benar)<br>
-                <?php else: ?>
+                <?php } else { ?>
                     &nbsp;&nbsp;- Jawaban user : <?php echo htmlentities((string)$user_jawaban['isi_jawaban']); ?> (salah)<br>
                     <?php
                     $kunci = $jawabanObj->getJawabanBenarBySoal($idsoal);
-                    if ($kunci):
+                    if ($kunci) {
                     ?>
                         &nbsp;&nbsp;&nbsp;&nbsp;Jawaban benar : <?php echo htmlentities((string)$kunci['isi_jawaban']); ?><br>
-                    <?php endif; ?>
-                <?php endif; ?>
-            <?php else: ?>
+                    <?php } ?>
+                <?php } ?>
+            <?php } else { ?>
                 &nbsp;&nbsp;- Jawaban user : - (salah)<br>
                 <?php
                 $kunci = $jawabanObj->getJawabanBenarBySoal($idsoal);
-                if ($kunci):
+                if ($kunci) {
                 ?>
                     &nbsp;&nbsp;&nbsp;&nbsp;Jawaban benar : <?php echo htmlentities((string)$kunci['isi_jawaban']); ?><br>
-                <?php endif; ?>
-            <?php endif; ?>
+                <?php } ?>
+            <?php } ?>
         </div>
-    <?php endforeach; ?>
+    <?php } ?>
 
     <hr>
     <p><strong>Skor Akhir : <?php echo $skor_akhir; ?></strong></p>
@@ -81,3 +79,6 @@ $skor_akhir = 0;
     </form>
 </body>
 </html>
+<?php
+}
+?>
