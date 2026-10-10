@@ -92,61 +92,62 @@ $soal_list = $soalObj->getSoalByHalaman($halaman_aktif);
 <html lang="id">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kuis Online</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <h2>Kuis Online</h2>
-        <p>Halaman <?php echo ($current_index + 1); ?> dari <?php echo count($daftar_halaman); ?></p>
-        <hr>
+    <h2>Kuis Online</h2>
+    <p>Halaman <?php echo ($current_index + 1); ?> dari <?php echo count($daftar_halaman); ?></p>
+    <hr>
 
-        <form action="index.php" method="POST">
-            <input type="hidden" name="halaman_aktif" value="<?php echo $halaman_aktif; ?>">
+    <form action="index.php" method="POST">
+        <input type="hidden" name="halaman_aktif" value="<?php echo $halaman_aktif; ?>">
 
-            <?php foreach ($soal_list as $soal): ?>
-                <?php
-                $idsoal = (int)$soal['idsoal'];
-                $nomor = (int)$soal['nomor'];
-                $pertanyaan = htmlentities((string)$soal['pertanyaan']);
+        <?php foreach ($soal_list as $soal): ?>
+            <?php
+            $idsoal = (int)$soal['idsoal'];
+            $nomor = (int)$soal['nomor'];
+            $pertanyaan = htmlentities((string)$soal['pertanyaan']);
 
-                // Opsi jawaban posisi random di tiap refresh (ORDER BY RAND())
-                $opsi_list = $jawabanObj->getJawabanBySoal($idsoal);
+            // Opsi jawaban posisi random di tiap refresh (ORDER BY RAND())
+            $opsi_list = $jawabanObj->getJawabanBySoal($idsoal);
 
-                // Cek jawaban sebelumnya di Session
-                $selected_idjawaban = isset($_SESSION['jawaban'][$idsoal]['idjawaban']) 
-                    ? (int)$_SESSION['jawaban'][$idsoal]['idjawaban'] 
-                    : null;
-                ?>
-                <div class="soal-item">
-                    <p><?php echo $nomor; ?>. <?php echo $pertanyaan; ?></p>
-                    <?php foreach ($opsi_list as $opsi): ?>
-                        <?php
-                        $idjawaban = (int)$opsi['idjawaban'];
-                        $isi_jawaban = htmlentities((string)$opsi['isi_jawaban']);
-                        $is_checked = ($selected_idjawaban === $idjawaban) ? 'checked' : '';
-                        $input_id = "opsi_" . $idsoal . "_" . $idjawaban;
-                        ?>
-                        <label class="opsi-item" for="<?php echo $input_id; ?>">
-                            <input type="radio" 
-                                   id="<?php echo $input_id; ?>" 
-                                   name="jawaban[<?php echo $idsoal; ?>]" 
-                                   value="<?php echo $idjawaban; ?>" 
-                                   <?php echo $is_checked; ?> 
-                                   required>
-                            <?php echo $isi_jawaban; ?>
-                        </label><br>
-                    <?php endforeach; ?>
+            // Cek jawaban sebelumnya di Session
+            $selected_idjawaban = isset($_SESSION['jawaban'][$idsoal]['idjawaban']) 
+                ? (int)$_SESSION['jawaban'][$idsoal]['idjawaban'] 
+                : null;
+            ?>
+            <div class="soal-card">
+                <div class="pertanyaan-text">
+                    <?php echo $nomor; ?>. <?php echo $pertanyaan; ?>
                 </div>
-            <?php endforeach; ?>
-
-            <div class="nav-buttons">
-                <?php if (!$is_first): ?>
-                    <input type="submit" name="aksi" value="Previous" class="btn" formnovalidate>
-                <?php endif; ?>
-                <input type="submit" name="aksi" value="Next" class="btn">
+                <?php foreach ($opsi_list as $opsi): ?>
+                    <?php
+                    $idjawaban = (int)$opsi['idjawaban'];
+                    $isi_jawaban = htmlentities((string)$opsi['isi_jawaban']);
+                    $is_checked = ($selected_idjawaban === $idjawaban) ? 'checked' : '';
+                    $input_id = "opsi_" . $idsoal . "_" . $idjawaban;
+                    ?>
+                    <label class="opsi-item" for="<?php echo $input_id; ?>">
+                        <input type="radio" 
+                               id="<?php echo $input_id; ?>" 
+                               name="jawaban[<?php echo $idsoal; ?>]" 
+                               value="<?php echo $idjawaban; ?>" 
+                               <?php echo $is_checked; ?> 
+                               required>
+                        <?php echo $isi_jawaban; ?>
+                    </label>
+                <?php endforeach; ?>
             </div>
-        </form>
-    </div>
+        <?php endforeach; ?>
+
+        <div class="nav-buttons">
+            <?php if (!$is_first): ?>
+                <input type="submit" name="aksi" value="Previous" class="btn" formnovalidate>
+            <?php endif; ?>
+            <input type="submit" name="aksi" value="Next" class="btn btn-primary">
+        </div>
+    </form>
 </body>
 </html>

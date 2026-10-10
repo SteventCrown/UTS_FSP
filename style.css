@@ -1,108 +1,44 @@
-/* style.css - UTS Full-stack Programming (Tampilan Polos / Basic Tanpa Kotak) */
+/* style.css - Sederhana & Minimalis */
 
 body {
-    font-family: "Times New Roman", Times, serif;
-    background-color: #ffffff;
-    margin: 30px;
-    color: #000000;
+    font-family: Arial, sans-serif;
+    max-width: 720px;
+    margin: 30px auto;
+    padding: 0 15px;
 }
 
-.container {
-    max-width: 750px;
-    padding: 0;
-    margin: 0;
-    border: none;
-    background: none;
+/* Bagian Soal */
+.soal-card {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 15px;
 }
 
-h2 {
-    margin-top: 0;
-    margin-bottom: 5px;
-    font-size: 22px;
-}
-
-p {
-    margin: 5px 0 10px 0;
-    font-size: 16px;
-}
-
-hr {
-    border: none;
-    border-top: 1px solid #000000;
-    margin: 15px 0;
-}
-
-/* Soal & Opsi Jawaban Vertikal (Kebawah) */
-.soal-item {
-    margin-bottom: 20px;
-}
-
-.soal-item p {
+.pertanyaan-text {
     font-weight: bold;
-    margin-bottom: 6px;
+    margin-bottom: 10px;
 }
 
 .opsi-item {
     display: block;
-    margin-bottom: 4px;
-    cursor: pointer;
-    font-size: 15px;
+    margin-bottom: 6px;
 }
 
-.opsi-item input[type="radio"] {
-    margin-right: 6px;
-    vertical-align: middle;
-}
-
-/* Tombol Standar / Sudut Siku (Tanpa Lekukan) */
 .nav-buttons {
     margin-top: 20px;
-    padding-top: 10px;
 }
 
-.btn, input[type="submit"] {
-    border-radius: 0px !important;
-    border: 1px solid #000000;
-    background-color: #e0e0e0;
-    color: #000000;
-    padding: 4px 16px;
-    font-family: "Times New Roman", Times, serif;
-    font-size: 15px;
-    cursor: pointer;
-    margin-right: 8px;
+.btn {
+    padding: 8px 18px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    background-color: #f0f0f0;
+    border-radius: 4px;
 }
 
-.btn:hover, input[type="submit"]:hover {
-    background-color: #cccccc;
-}
-
-/* Halaman Kesimpulan */
-.kesimpulan-list {
-    margin-bottom: 15px;
-}
-
-.kesimpulan-item {
-    margin-bottom: 15px;
-}
-
-.kesimpulan-item p {
-    margin-bottom: 4px;
-}
-
-.jawaban-user {
-    margin-left: 20px;
-    margin-bottom: 3px;
-    font-size: 15px;
-}
-
-.jawaban-benar {
-    margin-left: 20px;
-    margin-bottom: 3px;
-    font-size: 15px;
-}
-
-.skor-box {
-    margin: 20px 0 15px 0;
-    font-size: 18px;
-    font-weight: bold;
+.btn-primary {
+    background-color: #bcbcbc;
+    color: #ffffff;
+    border-color: #040404;
 }
